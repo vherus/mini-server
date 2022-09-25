@@ -33,3 +33,4 @@ Remember to cd into individual client and server files by splitting a terminal.
 - Add user profile, Schema and seed changes required. 
 - Display a list of user and links to profile
 - Have users edit profile information
+- pass user state more efficiently (use context provider?)
