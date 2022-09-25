@@ -23,14 +23,19 @@ Remember to cd into individual client and server files by splitting a terminal.
 - Turns out you could log in with any email or password. Solved with `if (login.error) {return alert('Incorrect infomation entered')}` Which checked if there was a token returned from res.json or a error code. Must rename login to token
 - Stole a bit of code im unsure about to check if people are logged in for app.js. Seems to work. just checks if you have a token. The whole program dies without it so hard to test its full use.
 - Delete user worked easily once i figured out the right way to feed in the userId to the url of the fetch. userId.userId was the answer.
+- fixed the user routes to include user/:id 
+- added a useEffect that populates a list of all users when logged in
+- added search for user by id bar clinet and server side required, have not yet linked the button to search for a profile.
+- added a profile page '/profile 
+- added a useEffect to app.js to find what user has logged in. to send the profile infomation to the profile page. This has not worked well. the page will render iD but then if i reload or revisit the page it all crashes. I had the same issue trying to display the user search results. i cant seem to use the returning data without crashing the system.
 
 ### Bugs to fix
+- why does trying to map or list results for user profile information on profile page or in search bar. kill the page if realoaded or revisited. 
+- cant have profile page inside the authenticate user route?
 - lots of functions running 2 or 4 times in logs. 
-- need to add a user route and auth route, currently delete user goes to '4000/:id' not 4000:/users/:id
 - rename 'login' to 'token' on login pages
 
 ### Next stages
-- Add user profile, Schema and seed changes required. 
-- Display a list of user and links to profile
 - Have users edit profile information
 - pass user state more efficiently (use context provider?)
+- breakdown in to more sensible pages and parts. start calling functions and auth middleware
