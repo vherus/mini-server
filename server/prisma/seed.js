@@ -12,6 +12,16 @@ async function seed() {
         password
       }
     })
+
+    const userProfile = await prisma.profile.create({
+      data: {
+        userId: createdUser.id,
+        firstName: 'Test',
+        lastName: 'Test',
+        username: 'username1',
+        bio: 'im a new guy'
+      }
+    })
   
     const adminUser = await prisma.user.create({
       data: {
@@ -20,8 +30,18 @@ async function seed() {
         role: 'ADMIN'
       }
     })
+
+    const adminProfile = await prisma.profile.create({
+      data: {
+        userId: adminUser.id,
+        firstName: 'Test',
+        lastName: 'Test',
+        username: 'username1',
+        bio: 'im a new admin'
+      }
+    })
   
-    console.log('users', createdUser, adminUser)
+    console.log('users', createdUser, userProfile, adminUser, adminProfile)
 }
 
 seed().catch(async (error) => {

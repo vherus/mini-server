@@ -17,6 +17,8 @@ app.use(express.urlencoded({ extended: true }));
 const userRouter = require('./routers/users.js');
 
 // app.use('/users', userRouter);
+app.use('/users', userRouter)
+app.use('/user', userRouter)
 app.use('/', userRouter)
 
 // Set up a default "catch all" route to use when someone visits a route

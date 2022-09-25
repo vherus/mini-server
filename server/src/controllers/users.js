@@ -13,8 +13,10 @@ const getAllUsers = async (req, res) => {
   const users = await prisma.user.findMany({});
 
   res.status(200).json({
-    users,
+    users
   });
+
+  console.log('users', users);
 };
 
 // register new user - needs checks for pass and email
@@ -75,6 +77,7 @@ const login = async (req, res) => {
     if (!foundUser)
       return res.status(404).json({ error: 'User does not exist ' });
       console.log('found user', foundUser);
+      console.log('found user id', foundUser.id);
 
       // compare passworded entered and hashed password in db
     const passwordsMatch = await bcrypt.compare(password, foundUser.password);
@@ -84,10 +87,10 @@ const login = async (req, res) => {
       return res.status(401).json({ error: 'Invalid password.' });
     }
 
-    const accessToken = createAccessToken(foundUser.email)
+    const accessToken = createAccessToken(foundUser.id, foundUser.email)
 
     // const refreshToken = createRefreshToken(foundUser.email)
-    // user.refreshToken = refreshToke
+    // user.refreshToken = refreshToken
 
     res.status(200).json({ data: accessToken });
 
@@ -96,6 +99,28 @@ const login = async (req, res) => {
   }
 
 };
+
+const getUserById = async (req, res) => {
+  console.log('finding user');
+
+  const userId = Number(req.params.id)
+  console.log('found user', userId);
+
+  const foundUser = await prisma.user.findFirst({
+    where: {
+      id: userId
+    }, 
+    include: {
+      profile: true
+    }
+  })
+
+  if (!foundUser) return res.status(404).json({ error: 'User not found' })
+
+  console.log('founduser', foundUser);
+
+  res.status(200).json({ foundUser })
+}
 
 const deleteUser = async (req, res) => {
   console.log('deleting user');
@@ -127,7 +152,7 @@ const deleteUser = async (req, res) => {
         }
       })
 
-      return res.status(201).json({ msg: 'Deleted user '})
+      return res.status(201).json({ msg: 'Deleted user'})
     }
 
     res.status(401).json({ msg: 'Not an Admin'})
@@ -141,5 +166,6 @@ module.exports = {
   getAllUsers,
   register,
   login,
-  deleteUser
+  deleteUser,
+  getUserById
 };

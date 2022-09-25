@@ -1,0 +1,10 @@
+PORT=4000
+
+JWT_SECRET = "tomsaccesstoken"
+JWT_REFRESH_SECRET = "tomsaccesstokenrefreshed"
+
+DATABASE_URL="postgres://xvhtidcp:k40Gstie_GcgkSw_mV2DBn6zeNlhrXW_@tyke.db.elephantsql.com/xvhtidcp?schema=prisma"
+SHADOW_DATABASE_URL="postgres://tsmxspla:e_sSH_yU_m7mfdUDGbaLeKWTY_YQx7HB@tyke.db.elephantsql.com/tsmxspla?schema=shadow"
+# JWT_SECRET="somesecurestring"
+JWT_EXPIRY="1h"
+JWT_REFRESH_EXPIRY="7d"

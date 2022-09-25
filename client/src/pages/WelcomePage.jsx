@@ -15,6 +15,23 @@ function WelcomePage() {
     navigate('../', { replace: true });
   };
 
+  const protectedPage = (event) => {
+    event.preventDefault();
+    navigate('/testpage', { replace: true });
+  }
+
+  const loadProfile = (event) => {
+    event.preventDefault();
+    navigate('/profile', { replace: true });
+  }
+
+  // useEffect
+  // get email from token
+  // find user by email
+  // get users from api using :id as url
+  // set isAdmin to true if res.data.data.use.role === admin
+
+
   return (
     <div className='welcome__container'>
       <h2>Welcome Page</h2>
@@ -33,6 +50,34 @@ function WelcomePage() {
             <Stack spacing={2} direction='row'>
               <Button
                 variant='contained'
+                onClick={loadProfile}
+                sx={{
+                  marginRight: '3rem',
+                }}
+              >
+                Profile
+              </Button>
+            </Stack>
+          </Box>
+
+          <Box>
+            <Stack spacing={2} direction='row'>
+              <Button
+                variant='contained'
+                onClick={protectedPage}
+                sx={{
+                  marginRight: '3rem',
+                }}
+              >
+                Protected
+              </Button>
+            </Stack>
+          </Box>
+
+          <Box>
+            <Stack spacing={2} direction='row'>
+              <Button
+                variant='contained'
                 onClick={signOut}
                 sx={{
                   marginRight: '3rem',
@@ -44,7 +89,6 @@ function WelcomePage() {
           </Box>
         </Box>
       </div>
-
       <AdminArea />
     </div>
   );
