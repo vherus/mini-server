@@ -1,5 +1,6 @@
 import React from 'react'
 
+// does it need to be passed user? Test?
 function UserForm({ handleSubmit, handleChange, user }) {
   return (
     <div>

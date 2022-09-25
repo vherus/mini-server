@@ -4,13 +4,13 @@ const {
     getAllUsers,
     register,
     login,
-    WelcomeFrontPage
+    deleteUser
 } = require('../controllers/users');
 
 router.get('/', getAllUsers)
 router.post('/register', register);
 router.post('/login', login);
-
+router.delete('/:id', deleteUser);
 
 module.exports = router;
 

@@ -3,7 +3,9 @@ const prisma = require('../utils/prisma');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-const { createAccessToken, createRefreshToken } = require('./auth')
+const { createAccessToken, createRefreshToken } = require('./auth');
+const { decode } = require('punycode');
+const { user } = require('../utils/prisma');
 
 const getAllUsers = async (req, res) => {
   console.log('hi tomus');
@@ -85,7 +87,7 @@ const login = async (req, res) => {
     const accessToken = createAccessToken(foundUser.email)
 
     // const refreshToken = createRefreshToken(foundUser.email)
-    // user.refreshToken = refreshToken
+    // user.refreshToken = refreshToke
 
     res.status(200).json({ data: accessToken });
 
@@ -95,21 +97,49 @@ const login = async (req, res) => {
 
 };
 
-const WelcomeFrontPage = async (req, res) => {
-  console.log('welcome page loading');
-  
-  const token = req.get('authorization')
+const deleteUser = async (req, res) => {
+  console.log('deleting user');
+  // we have used array destructuring to seperate Bearer and the token
+    // saves accessing via index
+  const [_, token] = req.get('authorization').split(' ')
   console.log('token', token);
 
-  const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET)
+  try {
+    // To verify give the token and secret decode phrase
+    const decoded = jwt.verify(token, process.env.JWT_SECRET)
+    // i get back details stored in token, email/role/id whatever you want.
+    console.log('decoded', decoded);
 
-  res.json({ message: `test`})
+    // find the user attached to the email address in the token
+    const foundUser = await prisma.user.findFirst({
+      where: {
+        email: decoded.email
+      }
+    })
+    // should return the user info 
+    console.log('found Admin', foundUser);
 
+    // check for admin status
+    if (foundUser.role === 'ADMIN') {
+      await prisma.user.delete({
+        where: {
+          id: Number(req.params.id)
+        }
+      })
+
+      return res.status(201).json({ msg: 'Deleted user '})
+    }
+
+    res.status(401).json({ msg: 'Not an Admin'})
+
+  } catch (error) {
+    res.status(500).json({ error, msg:'hi tom it didnt work' })
+  }
 }
 
 module.exports = {
   getAllUsers,
   register,
   login,
-  WelcomeFrontPage
+  deleteUser
 };
