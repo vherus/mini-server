@@ -1,8 +1,12 @@
 import React from 'react'
+import Header from '../components/header/Header'
 
 function TestPage() {
   return (
-    <div>TestPage</div>
+    <div>
+      <Header />
+      <p>Test route</p>
+    </div>
   )
 }
 

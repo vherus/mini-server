@@ -28,6 +28,8 @@ Remember to cd into individual client and server files by splitting a terminal.
 - added search for user by id bar clinet and server side required, have not yet linked the button to search for a profile.
 - added a profile page '/profile 
 - added a useEffect to app.js to find what user has logged in. to send the profile infomation to the profile page. This has not worked well. the page will render iD but then if i reload or revisit the page it all crashes. I had the same issue trying to display the user search results. i cant seem to use the returning data without crashing the system.
+- stopped profile page crashing most of the time but it doesnt change the user data if you log out and in with another user
+- added header component and home button
 
 ### Bugs to fix
 - why does trying to map or list results for user profile information on profile page or in search bar. kill the page if realoaded or revisited. 

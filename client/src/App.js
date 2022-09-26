@@ -13,6 +13,7 @@ import Profile from './components/Profile';
 import UserProfile from './components/UserProfile';
 
 // Profile route doesnt work inside autheticate 
+// check admin not completed so testpage header wont render in protected route
 function App() {
   const [user, setUser] = useState('');
 
@@ -52,6 +53,7 @@ function App() {
     return decoded.id;
   };
 
+
   return (
     <div className='App'>
       <main>
@@ -65,9 +67,9 @@ function App() {
 
             <Route path='/profile' element={<Profile user={user}/>} />
 
-          <Route element={<CheckAdmin />}>
+          {/* <Route element={<CheckAdmin />}> */}
             <Route path='/testpage' element={<TestPage />} />
-          </Route>
+          {/* </Route> */}
         </Routes>
 
         <Box>
