@@ -1,23 +1,108 @@
 import React from 'react';
+import { useState } from 'react';
 import Header from './header/Header';
 
-// doesnt render info half the time. db likes to crash a bit as well in terminal when starting up
+// user gets stuck on first to log in
 function Profile({ user }) {
   console.log('user', user);
-  const { id, email, profile } = user.foundUser;
+  const [profileData, setProfileData] = useState({})
+
+  const { id, email, profile } = user
   console.log('id , email, profile ', id, email, profile);
+
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    console.log('submitting data');
+
+    // const res = await fetch('http://localhost:4000/', {
+    //   method: 'PATCH',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   },
+    //   body: JSON.stringify(profileData),
+    // });
+
+    // const changedData = await res.json()
+    // console.log('changedData', changedData);
+    
+  }
+
+
+  // handle event for form 
+  const handleChange = (event) => {
+    event.preventDefault();
+    const { value, name } = event.target;
+
+    setProfileData({
+      ...profileData,
+      [name]: value,
+    });
+  };
 
   return (
     <div>
       <Header />
       <h2>My Profile</h2>   
-      <p>My Id: {id}</p>
-      <p>My Email: {email}</p>
+      <div>
+      <p>Id: {id}</p>
+      <p>Email: {email}</p>
       <p>Username: {profile.firstName}</p>
       <p>First Name: {profile.firstName}</p>
       <p>Last Name: {profile.lastName}</p>
-      <p>my Bio: {profile.bio}</p>
+      <p>Bio: {profile.bio}</p>
+      </div>
+      <div>
+
+        <form onSubmit={handleSubmit}>
+
+          <label htmlFor='email'>
+            Email
+            <input 
+              type='email' 
+              name='email' 
+              value={profileData.email} 
+              onChange={handleChange} />
+          </label>
+          <label htmlFor='username'>
+            Username
+            <input 
+              type='text' 
+              name='username' 
+              // value={profileData.username} 
+              onChange={handleChange} />
+          </label>
+          <label htmlFor='firstName'>
+            First Name
+            <input 
+              type='text' 
+              name='firstName' 
+              // value={profileData.firstName}       
+              onChange={handleChange} />
+          </label>
+          <label htmlFor='lastName'>
+            Last Name
+            <input 
+              type='text' 
+              name='lastName' 
+              // value={profileData.lastName}       
+              onChange={handleChange} />
+          </label>
+          <label htmlFor='bio'>
+           Bio
+            <input 
+              type='textarea' 
+              name='bio' 
+              rows={5}
+              // value={profileData.bio}       
+              onChange={handleChange} />
+          </label>
+          <input type='submit' name='submit' />
+
+        </form>
+      </div>
     </div>
+
   );
 }
 

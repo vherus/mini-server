@@ -8,7 +8,7 @@ async function seed() {
   
     const createdUser = await prisma.user.create({
       data: {
-        email: 'notmyrealemail@email.com',
+        email: 'maxpower@email.com',
         password
       }
     })
@@ -16,10 +16,27 @@ async function seed() {
     const userProfile = await prisma.profile.create({
       data: {
         userId: createdUser.id,
-        firstName: 'Test',
-        lastName: 'Test',
-        username: 'username1',
-        bio: 'im a new guy'
+        firstName: 'Max',
+        lastName: 'Power',
+        username: 'MaxPower89',
+        bio: 'I got my name off a microwave'
+      }
+    })
+
+    const createdUserTwo = await prisma.user.create({
+      data: {
+        email: 'atanzarian@email.com',
+        password
+      }
+    })
+
+    const userProfileTwo = await prisma.profile.create({
+      data: {
+        userId: createdUserTwo.id,
+        firstName: 'Armen',
+        lastName: 'Tanzarian',
+        username: 'Skinner69',
+        bio: 'From the mean streets of captial city'
       }
     })
   
@@ -34,14 +51,14 @@ async function seed() {
     const adminProfile = await prisma.profile.create({
       data: {
         userId: adminUser.id,
-        firstName: 'Test',
-        lastName: 'Test',
-        username: 'username1',
-        bio: 'im a new admin'
+        firstName: 'Craig',
+        lastName: 'Pelton',
+        username: 'DeanGCC',
+        bio: 'Best dean in the world'
       }
     })
   
-    console.log('users', createdUser, userProfile, adminUser, adminProfile)
+    console.log('users', createdUser, userProfile, createdUserTwo, userProfileTwo, adminUser, adminProfile)
 }
 
 seed().catch(async (error) => {

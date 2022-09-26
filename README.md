@@ -30,6 +30,8 @@ Remember to cd into individual client and server files by splitting a terminal.
 - added a useEffect to app.js to find what user has logged in. to send the profile infomation to the profile page. This has not worked well. the page will render iD but then if i reload or revisit the page it all crashes. I had the same issue trying to display the user search results. i cant seem to use the returning data without crashing the system.
 - stopped profile page crashing most of the time but it doesnt change the user data if you log out and in with another user
 - added header component and home button
+- got profile info to appear. but the site get stuck on the first user to log in
+- added update profile form on client side on profile page. probably wont work until fix the problem of wrong user being found. 
 
 ### Bugs to fix
 - why does trying to map or list results for user profile information on profile page or in search bar. kill the page if realoaded or revisited. 

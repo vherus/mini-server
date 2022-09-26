@@ -28,13 +28,12 @@ function App() {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`,
         },
-        // body: JSON.stringify(userId),
       });
 
-      const getUserReturn = await res.json();
-      console.log('getUserReturn', getUserReturn);
+      const foundUserResult = await res.json();
+      console.log('foundUserResult', foundUserResult.foundUser);
 
-      setUser(getUserReturn);
+      setUser(foundUserResult.foundUser);
     };
     console.log('getUser', getUser());
     console.log('user', user);
