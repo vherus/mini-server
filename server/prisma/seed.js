@@ -53,7 +53,7 @@ async function seed() {
         userId: adminUser.id,
         firstName: 'Craig',
         lastName: 'Pelton',
-        username: 'DeanGCC',
+        username: 'DeanDangerous',
         bio: 'Best dean in the world'
       }
     })

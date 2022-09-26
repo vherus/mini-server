@@ -32,6 +32,7 @@ Remember to cd into individual client and server files by splitting a terminal.
 - added header component and home button
 - got profile info to appear. but the site get stuck on the first user to log in
 - added update profile form on client side on profile page. probably wont work until fix the problem of wrong user being found. 
+- fixed cascade on delete
 
 ### Bugs to fix
 - why does trying to map or list results for user profile information on profile page or in search bar. kill the page if realoaded or revisited. 

@@ -3,6 +3,8 @@ import { useState } from 'react';
 import Header from './header/Header';
 
 // user gets stuck on first to log in
+// needs empty '' function for text boxes
+// if field is left out it goes blank!
 function Profile({ user }) {
   console.log('user', user);
   const [profileData, setProfileData] = useState({})
@@ -15,16 +17,16 @@ function Profile({ user }) {
     event.preventDefault();
     console.log('submitting data');
 
-    // const res = await fetch('http://localhost:4000/', {
-    //   method: 'PATCH',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify(profileData),
-    // });
+    const res = await fetch(`http://localhost:4000/user/${id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(profileData),
+    });
 
-    // const changedData = await res.json()
-    // console.log('changedData', changedData);
+    const changedData = await res.json()
+    console.log('changedData', changedData);
     
   }
 
@@ -33,6 +35,8 @@ function Profile({ user }) {
   const handleChange = (event) => {
     event.preventDefault();
     const { value, name } = event.target;
+    console.log('value', value);
+    console.log('name', name);
 
     setProfileData({
       ...profileData,
